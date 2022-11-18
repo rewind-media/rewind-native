@@ -7,8 +7,8 @@
  *
  * @format
  */
-
-import React, {type PropsWithChildren} from 'react';
+import React, {type PropsWithChildren, useRef} from 'react';
+import Video from 'react-native-video';
 import {
   SafeAreaView,
   ScrollView,
@@ -29,16 +29,32 @@ import {
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-
+  const videoRef = useRef<Video>(null);
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <WebView source={{uri: 'https://rewind-alpha.kensand.net'}}></WebView>
+      <Header>Test123</Header>
+      <Text>abc123</Text>
+      <Video
+        ref={videoRef}
+        source={{uri: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'}} // Can be a URL or a local file.
+        style={styles.backgroundVideo}
+      />
     </SafeAreaView>
   );
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+});
